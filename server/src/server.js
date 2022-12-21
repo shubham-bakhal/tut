@@ -1,5 +1,6 @@
 const express = require("express")
 const bodyParser = require("body-parser")
+const cors = require("cors")
 
 // create express app
 const app = express()
@@ -9,6 +10,13 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json())
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+    credentials: true,
+    exposedHeaders: ["set-cookie"],
+  })
+)
 
 // Configuring the database
 const dbConfig = require("./config/database.config.js")
